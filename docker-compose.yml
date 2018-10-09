@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  morguedb:
+    build: db/
+    restart: always
+    # volumes:
+    #   - ./db-data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: morgue
+      MYSQL_USER: morgue
+      MYSQL_PASSWORD: morgue
+      MYSQL_ROOT_PASSWORD: morgue
+  morgue:
+    build: morgue/
+    restart: always
+    ports:
+    - "8080:80"
+    depends_on: 
+      - morguedb
+    links:
+    - morguedb
+    volumes:
+      - ./example.json:/var/www/morgue/config/production.json
