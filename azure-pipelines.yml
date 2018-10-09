@@ -3,8 +3,10 @@ pool:
 
 steps:
 - script: docker-compose build
-  displayName: 'docker-compose build'
+  displayName: 'Build Containers'
 - script: docker-compose up -d
-  displayName: 'docker-compose up'
-- script: sleep 30
+  displayName: 'Start Containers'
+- script: sleep 60
+  displayName: 'Wait for containers to do some work'
 - script: docker-compose down
+  displayName: 'Remove Containers'
